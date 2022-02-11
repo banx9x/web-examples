@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Clock Demo</title>
+        <style>
+            .container {
+                width: 300px;
+                margin: auto;
+                padding: 100px 0;
+            }
+
+            .buttons {
+                word-spacing: -1ch;
+            }
+
+            #clock {
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 60px;
+            }
+
+            button {
+                display: inline-block;
+                width: calc(25% - 6px);
+                border: 1px solid #aaa;
+                border-radius: 0;
+                padding: 10px 0;
+            }
+
+            button:not(:last-child) {
+                margin-right: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="clock"></div>
+            <div class="buttons">
+                <button id="start">Start</button>
+                <button id="record">Record</button>
+                <button id="stop">Stop</button>
+                <button id="reset">Reset</button>
+            </div>
+
+            <div id="records"></div>
+        </div>
+
+        <!-- <script type="module">
+            function loadScript(src, callback) {
+                let script = document.createElement("script");
+                script.src = src;
+                script.type = "module";
+                document.head.append(script);
+
+                script.onload = () => callback(null, src);
+                script.onerror = () => callback(`Lỗi tải file ${src}`);
+            }
+
+            loadScript("clock.js", (error, data) => {
+                if (!error) {
+                    console.log(`Tải ${data} xong`);
+                    loadScript("index.js", (error, data) => {
+                        if (!error) {
+                            console.log(`Tải ${data} xong`);
+                        }
+                    });
+                } else {
+                    console.log(error);
+                }
+            });
+        </script> -->
+        <script src="index.js" type="module"></script>
+    </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Get Bound Client Rect</title>
+        <style>
+            img {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        /><img
+            src="cover.webp"
+            alt=""
+            class="lazy"
+            data-src="ba.webp"
+            width="300"
+            height="300"
+        />
+
+        <script>
+            (function () {
+                let items = Array.from(document.querySelectorAll(".lazy"));
+
+                function lazyload() {
+                    for (let i = 0; i < items.length; i++) {
+                        let clientHeight =
+                            document.documentElement.clientHeight;
+                        let item = items[i];
+                        let { top, bottom, height } =
+                            item.getBoundingClientRect();
+
+                        if (
+                            (top > 0 && top < clientHeight - 100) ||
+                            (bottom > 100 && bottom < clientHeight)
+                        ) {
+                            let src = item.getAttribute("data-src");
+                            item.src = src;
+                            items.splice(i, 1);
+                            i--;
+                        }
+                    }
+
+                    if (items.length == 0) {
+                        window.removeEventListener("scroll", lazyload);
+                        window.removeEventListener("resize", lazyload);
+                    }
+                }
+
+                lazyload();
+
+                window.addEventListener("scroll", lazyload);
+                window.addEventListener("resize", lazyload);
+            })();
+        </script>
+    </body>
+</html>

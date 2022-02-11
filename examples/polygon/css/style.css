@@ -1,0 +1,51 @@
+#slider {
+  background-image: linear-gradient(to right, #FF416C, #FF4B2B);
+  width: 100%;
+  padding: 50px 0;
+  perspective: 800px; /* chiều sâu */
+  perspective-origin: center 100px; /* vênh trục */
+}
+
+#stage {
+  transform-style: preserve-3d;
+  transform: translateZ(-200px);
+}
+
+#shape {
+  position: relative;
+  margin: 0 auto;
+  height: 210px;
+  width: 210px;
+  transform-style: preserve-3d;
+  animation: spin 27s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(-360deg); }
+}
+
+.plane {
+  position: absolute;
+  height: 210px;
+  width: 210px;
+  border: 1px solid white;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 114pt;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* 
+translateZ = (width / 2) / tan(deg / 2);
+*/
+.ring>.item-1 { transform: rotateY(0deg) translateZ(288px); }
+.ring>.item-2 { transform: rotateY(40deg) translateZ(288px); }
+.ring>.item-3 { transform: rotateY(80deg) translateZ(288px); }
+.ring>.item-4 { transform: rotateY(120deg) translateZ(288px); }
+.ring>.item-5 { transform: rotateY(160deg) translateZ(288px); }
+.ring>.item-6 { transform: rotateY(200deg) translateZ(288px); }
+.ring>.item-7 { transform: rotateY(240deg) translateZ(288px); }
+.ring>.item-8 { transform: rotateY(280deg) translateZ(288px); }
+.ring>.item-9 { transform: rotateY(320deg) translateZ(288px); }

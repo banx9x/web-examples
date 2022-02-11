@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dropdown</title>
+        <style>
+            .sub-menu {
+                display: none;
+            }
+
+            .show {
+                display: block !important;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="menu" class="menu">
+            <li class="menu-items">
+                Dropdown 1
+                <ul class="sub-menu">
+                    <li class="sub-items">Submenu 1 - 1</li>
+                    <li class="sub-items">Submenu 1 - 2</li>
+                    <li class="sub-items">Submenu 1 - 3</li>
+                </ul>
+            </li>
+            <li class="menu-items">
+                Dropdown 2
+                <ul class="sub-menu">
+                    <li class="sub-items">Submenu 2 - 1</li>
+                    <li class="sub-items">Submenu 2 - 2</li>
+                    <li class="sub-items">Submenu 2 - 3</li>
+                </ul>
+            </li>
+            <li class="menu-items">
+                Dropdown 3
+                <ul class="sub-menu">
+                    <li class="sub-items">Submenu 3 - 1</li>
+                    <li class="sub-items">Submenu 3 - 2</li>
+                    <li class="sub-items">Submenu 3 - 3</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p id="click"></p>
+        <script>
+            // Cái này để lưu cái li đã click trước đó
+            let prev;
+
+            // Thay vì thêm handler cho menu-item, mình thêm handler cho toàn trang (document), cái này gọi là nổi bọt sự kiện
+            // Nôm na chút, khi có một sự kiện xảy ra (ví dụ 'click') trên một thành phần trên trang, đầu tiên nó sẽ phát ra sự kiện click trên nó, sau đó, sự kiện sẽ được chuyển tiếp lên thành phần phía trên (cha mẹ)
+            // Vì bản chất các thành phần trên trang nó là các layer lồng nhau, khi click vào thành phần, thì cũng tương ứng click vào thành phần cha (right???)
+            document.addEventListener("click", function (ev) {
+                // Ở đây, event target sẽ là đối tượng chính được click vào
+                // Lấy ra nút DOM gần nhất có class là menu-items
+                let li = ev.target.closest(".menu-items");
+
+                // Tuy nhiên nếu click vào một khu vực khác, thì li sẽ bằng null
+                // Vậy nên check xem có đúng là click vào li hay không
+                if (li) {
+                    // Nếu đúng, kiểm tra xem trước đó đã click cái li nào hay chưa
+                    // Nếu click rồi, thì kiểm tra xem cái đã click trước đó có phải cái hiện tại click hay không (vì nếu click lại thì phải đóng chứ)
+                    // Nếu cái li trước đó không phải cái hiện tại, thì ẩn cái menu bên trong nó đi
+                    prev &&
+                        prev != li &&
+                        prev
+                            .querySelector(".sub-menu")
+                            .classList.remove("show");
+
+                    // Gán cho cái prev là cái menu hiện tại để check lần sau
+                    prev = li;
+                    // Cho hiển thị cái sub-menu trong li hiện tại
+                    li.querySelector(".sub-menu").classList.toggle("show");
+                    // Cái này lấy text ra làm màu tý thôi
+                    click.textContent = ev.target.firstChild.textContent;
+                } else {
+                    // Nếu không có li, tức là click ra ngoài, thì kiểm tra xem trước đó đã click cái li nào hay chưa
+                    // Nếu có (prev không null) thì ẩn cái sub-menu của nó đi
+                    // Rồi xóa giá trị của prev đi (không có cái nào được check nữa)
+                    prev &&
+                        prev
+                            .querySelector(".sub-menu")
+                            .classList.remove("show") &&
+                        (prev = null);
+                }
+            });
+        </script>
+    </body>
+</html>
